@@ -1,0 +1,54 @@
+{
+    "experiment": {
+        "log_dir": "./ascend-log"
+    },
+    "launch": {
+        "nnodes": 1,
+        "nproc_per_node": 8,
+        "node_rank": 0,
+        "master_addr": "localhost"
+    },
+    "env_vars": {
+        "HCCL_CONNECT_TIMEOUT": "3600",
+        "HCCL_EXEC_TIMEOUT": "0"
+    },
+    "device_type": "ascend",
+    "distributed": {
+        "tensor_model_parallel_size": 8,
+        "pipeline_model_parallel_size": 1,
+        "sequence-parallel": null,
+        "use-distributed-optimizer": null
+    },
+    "mixed_precision": {
+        "bf16": null
+    },
+    "data": {
+        "distributed-timeout-minutes": 120,
+        "embedding-weights-in-fp32": null,
+        "attention-softmax-in-fp32": null,
+        "accumulate-allreduce-grads-in-fp32": null
+    },
+    "training": {
+        "micro_batch_size": 1,
+        "global_batch_size": 72, 
+        "train_samples": 360000,
+        "eval-iters": 0
+    },
+    "network": {
+        "disable-bias-linear": null,
+        "no-gradient-accumulation-fusion": null,
+        "use-flash-attn": null,
+        "pre-tokens": 2048,
+        "next-tokens": 0,
+        "shape-order": "SBH",
+        "use-npu-mc2": null,
+        "use-npu-swiglu": null
+    },
+    "learning_rate": {
+        "lr_warmup_samples": 7200 
+    },
+    "checkpoint": {
+        "save": null,
+        "load": null
+    }
+}
