@@ -32,11 +32,6 @@ from . import adaptor_core_tensor_parallel_layers
 from . import adaptor_arguments
 from . import adaptor_core_models_common_rotary_pos_embedding
 
-from megatron import get_args
-args = get_args()
-if args.use_npu_mc2:
-    from .ascend_turbo.initialize import initialize_cfg_from_args    
-    initialize_cfg_from_args(args)
 
 def wrapper_type(fn):
     @wraps(fn)

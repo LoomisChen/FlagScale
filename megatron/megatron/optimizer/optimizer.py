@@ -7,7 +7,7 @@ from abc import abstractmethod
 from apex.multi_tensor_apply import multi_tensor_applier
 try:
     import amp_C
-except ImportError
+except ImportError:
     amp_C = None
 import torch
 from torch.nn.parallel.distributed import DistributedDataParallel as torchDDP

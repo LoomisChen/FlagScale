@@ -2,6 +2,8 @@
     "experiment": {
         "log_dir": "./ascend-log"
     },
+    "device_type": "ascend",
+    "shell_cmds": "source /usr/local/Ascend/ascend-toolkit/set_env.sh",
     "launch": {
         "nnodes": 1,
         "nproc_per_node": 8,
@@ -12,29 +14,50 @@
         "HCCL_CONNECT_TIMEOUT": "3600",
         "HCCL_EXEC_TIMEOUT": "0"
     },
-    "device_type": "ascend",
+    "training": {
+        "train_samples": 360000,
+        "eval-iters": 0,
+        "micro_batch_size": 1,
+        "global_batch_size": 72
+    },
     "distributed": {
         "tensor_model_parallel_size": 8,
         "pipeline_model_parallel_size": 1,
+        "tensor-model-parallel-size": 8,
         "sequence-parallel": null,
         "use-distributed-optimizer": null
     },
     "mixed_precision": {
-        "bf16": null
-    },
-    "data": {
-        "distributed-timeout-minutes": 120,
+        "bf16": null,
         "embedding-weights-in-fp32": null,
         "attention-softmax-in-fp32": null,
         "accumulate-allreduce-grads-in-fp32": null
     },
-    "training": {
-        "micro_batch_size": 1,
-        "global_batch_size": 72, 
-        "train_samples": 360000,
-        "eval-iters": 0
+    "data": {
+        "data-path": "../wudao_pretrain/wudao_pretrain_text_document",
+        "tokenizer-type": "AquilaTokenizer",
+        "vocab-file": "../aquila/tokenizer/vocab.json",
+        "vocab-size": 100008,
+        "merge-file": "../aquila/tokenizer/merges.txt",
+        "special-tokens-file": "../aquila/tokenizer/special_tokens.txt",
+        "data-impl": "mmap",
+        "split": 1,
+        "distributed-timeout-minutes": 120
     },
     "network": {
+        "num-layers": 32,
+        "hidden-size": 4096,
+        "num-attention-heads": 32,
+        "seq-length": 2048,
+        "max-position-embeddings": 2048,
+        "layernorm-epsilon": 1e-5,
+        "use-rotary-position-embeddings": null,
+        "rotary-position-embeddings-in-fp32": null,
+        "no-position-embedding": null,
+        "swiglu": null,
+        "multiple-of": 256,
+        "apply-layernorm-rms": null,
+        "untie-embeddings-and-output-weights": null,
         "disable-bias-linear": null,
         "no-gradient-accumulation-fusion": null,
         "use-flash-attn": null,
@@ -44,11 +67,25 @@
         "use-npu-mc2": null,
         "use-npu-swiglu": null
     },
+    "initialization": {
+        "init-method-std": 0.02,
+        "seed": 1234
+    },
+    "regularization": {
+        "attention-dropout": 0.0,
+        "hidden-dropout": 0.0,
+        "weight-decay": 0.1,
+        "adam-beta1": 0.9,
+        "adam-beta2": 0.95,
+        "clip-grad": 1.0
+    },
     "learning_rate": {
+        "lr": 2.0e-5,
+        "min-lr": 2.0e-6,
+        "lr-decay-style": "cosine",
         "lr_warmup_samples": 7200 
     },
-    "checkpoint": {
-        "save": null,
-        "load": null
+    "logging": {
+        "log-interval": 1
     }
 }

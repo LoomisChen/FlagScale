@@ -8,7 +8,7 @@ from torch import inf
 from apex.multi_tensor_apply import multi_tensor_applier
 try:
     import amp_C
-except ImportError
+except ImportError:
     amp_C = None
 
 from megatron.model.module import param_is_not_shared

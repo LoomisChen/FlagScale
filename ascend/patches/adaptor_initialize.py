@@ -4,10 +4,9 @@ import time
 import torch
 
 import megatron
-from megatron.initialize import (
-    _warmup_jit_function, 
-    initialize_megatron,
-)
+from megatron import get_args
+from megatron.initialize import _warmup_jit_function
+
 
 def _compile_dependencies():
     if torch.distributed.get_rank() == 0:
@@ -24,6 +23,12 @@ def _compile_dependencies():
 
 
 def set_jit_fusion_options():
+    # initial mc2
+    args = get_args()
+    if args.use_npu_mc2:
+        from .ascend_turbo.initialize import initialize_cfg_from_args    
+        initialize_cfg_from_args(args)
+    
     """Set PyTorch JIT layer fusion options."""
     # flags required to enable jit fusion kernels
     TORCH_MAJOR = int(torch.__version__.split('.')[0])
@@ -44,12 +49,9 @@ def set_jit_fusion_options():
         torch._C._jit_override_can_fuse_on_gpu(True)
     _warmup_jit_function()
 
-megatron.initialize.initialize_megatron = initialize_megatron
+
 megatron.initialize._compile_dependencies = _compile_dependencies
 
-for k, v in sys.modules.items():
-    if 'megatron' in k and hasattr(v, 'initialize_megatron'):
-        setattr(v, 'initialize_megatron', initialize_megatron)
 
 for k, v in sys.modules.items():
     if 'megatron' in k and hasattr(v, 'set_jit_fusion_options'):
