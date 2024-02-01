@@ -15,23 +15,23 @@
         "HCCL_EXEC_TIMEOUT": "0"
     },
     "training": {
-        "train_samples": 360000,
+        "train-samples": 360000,
         "eval-iters": 0,
-        "micro_batch_size": 1,
-        "global_batch_size": 72
+        "micro-batch-size": 8,
+        "global-batch-size": 72
     },
     "distributed": {
-        "tensor_model_parallel_size": 8,
-        "pipeline_model_parallel_size": 1,
         "tensor-model-parallel-size": 8,
-        "sequence-parallel": null,
-        "use-distributed-optimizer": null
+        "pipeline-model-parallel-size": 1,
+        "make-vocab-size-divisible-by": 8,
+        "sequence-parallel": true,
+        "use-distributed-optimizer": true
     },
     "mixed_precision": {
-        "bf16": null,
-        "embedding-weights-in-fp32": null,
-        "attention-softmax-in-fp32": null,
-        "accumulate-allreduce-grads-in-fp32": null
+        "bf16": true,
+        "embedding-weights-in-fp32": true,
+        "attention-softmax-in-fp32": true,
+        "accumulate-allreduce-grads-in-fp32": true
     },
     "data": {
         "data-path": "../wudao_pretrain/wudao_pretrain_text_document",
@@ -51,21 +51,21 @@
         "seq-length": 2048,
         "max-position-embeddings": 2048,
         "layernorm-epsilon": 1e-5,
-        "use-rotary-position-embeddings": null,
-        "rotary-position-embeddings-in-fp32": null,
-        "no-position-embedding": null,
-        "swiglu": null,
+        "use-rotary-position-embeddings": true,
+        "rotary-position-embeddings-in-fp32": true,
+        "no-position-embedding": true,
+        "swiglu": true,
         "multiple-of": 256,
-        "apply-layernorm-rms": null,
-        "untie-embeddings-and-output-weights": null,
-        "disable-bias-linear": null,
-        "no-gradient-accumulation-fusion": null,
-        "use-flash-attn": null,
+        "apply-layernorm-rms": true,
+        "untie-embeddings-and-output-weights": true,
+        "disable-bias-linear": true,
+        "no-gradient-accumulation-fusion": true,
+        "use-flash-attn": true,
         "npu-fa-pre-tokens": 2048,
         "npu-fa-next-tokens": 0,
         "npu-fa-shape-order": "SBH",
-        "use-npu-mc2": null,
-        "use-npu-swiglu": null
+        "use-npu-mc2": true,
+        "use-npu-swiglu": true
     },
     "initialization": {
         "init-method-std": 0.02,
@@ -83,7 +83,7 @@
         "lr": 2.0e-5,
         "min-lr": 2.0e-6,
         "lr-decay-style": "cosine",
-        "lr_warmup_samples": 7200 
+        "lr-warmup-samples": 7200 
     },
     "logging": {
         "log-interval": 1

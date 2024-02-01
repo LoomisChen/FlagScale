@@ -72,7 +72,7 @@ def ParallelAttentionInit(self, config, layer_number,
     self.params_dtype = config.params_dtype
     self.sequence_parallel = config.sequence_parallel
     self.rotary_interleaved_patch = args.rotary_interleaved_patch
-    self.shape_order = args.shape_order
+    self.shape_order = args.npu_fa_shape_order
 
     self.group_query_attention = args.group_query_attention
     self.num_query_groups = args.num_query_groups
@@ -200,8 +200,8 @@ def ParallelAttentionInit(self, config, layer_number,
     if self.use_flash_attn:
         self.core_attention_flash = FlashSelfAttention(
             causal=True, attention_dropout=args.attention_dropout,
-            pre_tokens=args.pre_tokens, next_tokens=args.next_tokens,
-            shape_order=args.shape_order
+            pre_tokens=args.npu_fa_pre_tokens, next_tokens=args.npu_fa_next_tokens,
+            shape_order=args.npu_fa_shape_order
         )
 
     # Output.

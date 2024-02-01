@@ -10,13 +10,14 @@ from . import adaptor_amp_c
 
 if 'amp_C' in sys.modules:
     del sys.modules['amp_C']
-sys.modules['amp_C'] = __import__('megatron_npu.adaptor_amp_c')
+sys.modules['amp_C'] = __import__('patches.adaptor_amp_c')
 
 global FLAG_SUPPORT_INF_NAN
 FLAG_SUPPORT_INF_NAN = hasattr(torch_npu.npu.utils, 'is_support_inf_nan') and torch_npu.npu.utils.is_support_inf_nan()
 
 from . import adaptor_core_tensor_parallel_random
 from . import adaptor_core_utils
+from . import adaptor_core_models_common_rotary_pos_embedding
 from . import adaptor_initialize
 from . import adaptor_model_fused_layer_norm
 from . import adaptor_model_fused_softmax
@@ -30,7 +31,6 @@ from . import adaptor_schedules
 from . import adaptor_core_tensor_parallel_cross_entropy
 from . import adaptor_core_tensor_parallel_layers
 from . import adaptor_arguments
-from . import adaptor_core_models_common_rotary_pos_embedding
 
 
 def wrapper_type(fn):
