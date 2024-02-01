@@ -38,9 +38,9 @@
         "disable-bias-linear": null,
         "no-gradient-accumulation-fusion": null,
         "use-flash-attn": null,
-        "pre-tokens": 2048,
-        "next-tokens": 0,
-        "shape-order": "SBH",
+        "npu-fa-pre-tokens": 2048,
+        "npu-fa-next-tokens": 0,
+        "npu-fa-shape-order": "SBH",
         "use-npu-mc2": null,
         "use-npu-swiglu": null
     },

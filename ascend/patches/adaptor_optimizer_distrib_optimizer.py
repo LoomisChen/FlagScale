@@ -1,6 +1,3 @@
-from functools import reduce
-
-import torch
 import megatron
 import megatron.optimizer
 from megatron.core import tensor_parallel

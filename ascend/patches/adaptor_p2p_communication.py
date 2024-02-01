@@ -3,7 +3,6 @@ from typing import Optional
 import torch
 import megatron
 from megatron.core.parallel_state import get_pipeline_model_parallel_prev_rank, get_pipeline_model_parallel_next_rank
-from megatron.core.pipeline_parallel import p2p_communication
 
 def _batched_p2p_ops(
     *,

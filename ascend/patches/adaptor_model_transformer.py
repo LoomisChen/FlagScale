@@ -3,10 +3,9 @@ import math
 import torch
 import torch.nn.functional as F
 import megatron
-from megatron import get_timers, get_args, core, get_num_microbatches
+from megatron import get_args, core
 from megatron.core import mpu, tensor_parallel
-from megatron.model.enums import AttnMaskType, ModelType, LayerType, AttnType
-from megatron.model.fused_bias_gelu import bias_gelu_impl
+from megatron.model.enums import AttnMaskType, AttnType
 from megatron.model.transformer import ParallelAttention, CoreAttention
 from megatron.core.models.common.rotary_pos_embedding import apply_rotary_pos_emb
 from megatron.model.transformer import ParallelMLP

@@ -143,18 +143,6 @@ def _add_training_args(parser):
                        help='Disable fusing gradient accumulation to weight '
                        'gradient computation of linear layers',
                        dest='gradient_accumulation_fusion')
-    
-    group.add_argument('--use-npu-mc2', action='store_true',
-                       help='Use matmul and hccl communication fusion implementation for Ascend NPU.')
-    group.add_argument('--use-npu-swiglu', action='store_true',
-                       help='Use swiglu fusion implementation for Ascend NPU.')
-    group.add_argument('--pre-tokens', type=int, default=None,
-                       help='pre-tokens used by Flash attention')
-    group.add_argument('--next-tokens', type=int, default=None,
-                       help='next-tokens used by Flash attention')
-    group.add_argument('--shape-order', type=str, default='SBH',
-                       choices=['SBH', 'BSH', 'BNSD', 'BSND'],
-                       help='input shape order used by Flash attention')
     return parser
 
 

@@ -1,7 +1,6 @@
 import torch.nn.functional as F
 import megatron
 from megatron.core.tensor_parallel.mappings import reduce_from_tensor_model_parallel_region
-from megatron.core.tensor_parallel.layers import VocabParallelEmbedding
 
 
 def VocabParallelEmbeddingForward(self, input_):

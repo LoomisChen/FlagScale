@@ -1,7 +1,6 @@
 import sys
 import math
 import torch
-import megatron.optimizer
 
 
 def clip_grad_norm_fp32(parameters, grads_for_norm, max_norm, norm_type=2, model_parallel_group=None):
